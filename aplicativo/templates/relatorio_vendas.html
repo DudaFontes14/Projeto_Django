@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Relatório de Vendas{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Vendas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+        }
+        .grafico {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .tabela {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .tabela th, .tabela td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        .tabela th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Relatório de Vendas</h1>
+ 
+        <!-- Gráfico de Vendas Gerais Mensais -->
+        <h2>Vendas Gerais Mensais</h2>
+        <div class="grafico">
+            <img src="data:image/png;base64,{{ img_gerais }}" alt="Gráfico de Vendas Gerais Mensais">
+        </div>
+ 
+        <!-- Tabela de Vendas Gerais -->
+        <table class="tabela">
+            <thead>
+                <tr>
+                    <th>Total de Vendas</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for venda in vendas_gerais %}
+                <tr>
+                    <td>{{ venda.total_vendas }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+ 
+        <!-- Gráfico de Vendas por Curso -->
+        <h2>Vendas por Curso</h2>
+        <div class="grafico">
+            <img src="data:image/png;base64,{{ img_curso }}" alt="Gráfico de Vendas por Curso">
+        </div>
+ 
+        <!-- Tabela de Vendas por Curso -->
+        <table class="tabela">
+            <thead>
+                <tr>
+                    <th>Curso</th>
+                    <th>Total de Vendas</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for venda in vendas_por_curso %}
+                <tr>
+                    <td>{{ venda.nome_curso }}</td>
+                    <td>{{ venda.total_vendas }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+{% endblock %}
